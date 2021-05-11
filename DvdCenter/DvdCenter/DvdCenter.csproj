@@ -215,6 +215,14 @@
     <Compile Include="Migrations\202105071922433_ForMembership.Designer.cs">
       <DependentUpon>202105071922433_ForMembership.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105090949044_InitialModel1.cs" />
+    <Compile Include="Migrations\202105090949044_InitialModel1.Designer.cs">
+      <DependentUpon>202105090949044_InitialModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105091411563_InitialModel2.cs" />
+    <Compile Include="Migrations\202105091411563_InitialModel2.Designer.cs">
+      <DependentUpon>202105091411563_InitialModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -222,9 +230,12 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
+    <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\NewCustomerViewModel.cs" />
+    <Compile Include="ViewModel\NewMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -290,6 +301,8 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Movie\Index.cshtml" />
     <Content Include="Views\Movie\Details.cshtml" />
+    <Content Include="Views\Customer\New.cshtml" />
+    <Content Include="Views\Movie\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -311,6 +324,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105071922433_ForMembership.resx">
       <DependentUpon>202105071922433_ForMembership.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105090949044_InitialModel1.resx">
+      <DependentUpon>202105090949044_InitialModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105091411563_InitialModel2.resx">
+      <DependentUpon>202105091411563_InitialModel2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

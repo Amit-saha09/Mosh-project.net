@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DvdCenter.ViewModel;
+using System.Data.Entity.Validation;
 
 namespace DvdCenter.Controllers
 {
@@ -22,6 +24,55 @@ namespace DvdCenter.Controllers
         {
             _context.Dispose();
         }
+
+        public ActionResult New()
+        {
+            var Genre = _context.Genre.ToList();
+            var ViewModel = new NewMovieViewModel
+            {
+                Genre = Genre
+
+            };
+            return View(ViewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Movie movie)
+        {
+            if(!ModelState.IsValid)
+            {
+                var viewModel = new NewMovieViewModel(movie)
+                {
+                    Genre = _context.Genre.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var customerInDb = _context.Movies.Single(c => c.Id == movie.Id);
+                customerInDb.Name = movie.Name;
+                customerInDb.GenreId = movie.GenreId;
+                customerInDb.ReleaseDate = movie.ReleaseDate;
+                customerInDb.NumberInStock = movie.NumberInStock;
+                
+               
+
+            }
+           
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index","Movie");
+        }
+
+
         public ActionResult Index()
         {
             var movies = _context.Movies.Include(m => m.Genre).ToList();
@@ -36,6 +87,21 @@ namespace DvdCenter.Controllers
 
 
             return View(movie);
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == Id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new NewMovieViewModel(movie)  
+            {
+               
+                Genre = _context.Genre.ToList()
+            };
+            return View("New", viewModel);
         }
     }
 }

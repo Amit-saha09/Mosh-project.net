@@ -12,7 +12,15 @@ namespace DvdCenter.Models
         [Required]
         public string Name { get; set; }
         public MembershipType MembershipType { get; set; }
-        public int MembershipId { get; set; }
+
+        [Display(Name="Membership Type")]
+        public int MembershipTypeId { get; set; }
+
+        [Display(Name="Date of Birth")]
+        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
+
+        public static readonly int PayasYouGo = 1;
+        public static readonly int Unknown = 0;
     }
 }
