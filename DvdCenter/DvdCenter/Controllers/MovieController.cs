@@ -25,6 +25,7 @@ namespace DvdCenter.Controllers
             _context.Dispose();
         }
 
+        [Authorize(Roles =RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var Genre = _context.Genre.ToList();
@@ -73,10 +74,13 @@ namespace DvdCenter.Controllers
         }
 
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            var movies = _context.Movies.Include(m => m.Genre).ToList();
-            return View(movies);
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("Index");
+          
+            return View("ReadOnlyList");
+          
         }
 
         public ActionResult Details(int id)

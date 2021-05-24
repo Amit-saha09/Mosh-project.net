@@ -86,6 +86,11 @@ namespace DvdCenter
             }
             return manager;
         }
+
+        internal void CreateAsync(string id, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     // Configure the application sign-in manager which is used in this application.
